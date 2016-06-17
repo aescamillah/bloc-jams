@@ -30,6 +30,21 @@
      ]
  };
 
+ var albumTest = {
+     title: 'The Test',
+     artist: 'Test Artist',
+     label: 'Test label',
+     year: '2016',
+     albumArtUrl: 'assets/images/album_covers/03.png',
+     songs: [
+         { title: 'song 1', duration: '1:00' },
+         { title: 'song 2', duration: '2:00' },
+         { title: 'song 3', duration: '3:00'},
+         { title: 'song 4', duration: '4:00' },
+         { title: 'song 5', duration: '5:00'}
+     ]
+ };
+
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -42,13 +57,13 @@
      return template;
  };
 
+ var albumTitle = document.getElementsByClassName('album-view-title')[0];
+ var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+ var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+ var albumImage = document.getElementsByClassName('album-cover-art')[0];
+ var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
  var setCurrentAlbum = function(album) {
-     // #1
-     var albumTitle = document.getElementsByClassName('album-view-title')[0];
-     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-     var albumImage = document.getElementsByClassName('album-cover-art')[0];
-     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
  
      // #2
      albumTitle.firstChild.nodeValue = album.title;
@@ -67,4 +82,13 @@
  
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+     var albums_array = [albumPicasso, albumMarconi, albumTest];
+     var aux = 1;
+     albumImage.addEventListener("click",function(event) {
+         setCurrentAlbum(albums_array[aux]);
+         aux++;
+         if (aux == albums_array.length) {
+             aux = 0;
+         }
+     });
  };
